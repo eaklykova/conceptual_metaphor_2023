@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+    <h1>Корпус русской концептуальной метафоры</h1>
+	<div class="content-container">
+    	<div class="left-content">
+            <form action="{{ url_for('search') }}" method="post">
+                <div>
+                    <label for="search_query">Поиск</label>
+                    <select id="search_option" name="search_option">
+                        <option value="token">по токену</option>
+                        <option value="lemma">по лемме</option>
+                        <option value="reg_exp">по регулярному выражению</option>
+                    </select>
+
+                    <input type="text" id="search_query" name="search_query">
+                </div>
+                <div>
+                    <label for="sourceSelect">Выберите источник:</label>
+                    <select id="sourceSelect" name="sourceSelect">
+                        {% for source_option in source_options %}
+                            <option value="{{ source_option }}">{{ source_option }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <label for="targetSelect">Выберите цель:</label>
+                    <select id="targetSelect" name="targetSelect">
+                        {% for target_option in target_options %}
+                            <option value="{{ target_option }}">{{ target_option }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit">Искать</button>
+        		<button type="button" onclick="window.location.href='{{url_for('metaphors')}}';">Список метафор</button>
+            </form>
+    	</div>
+    	<div class="right-content">
+        	<p><b>Добро пожаловать в корпус русской глагольной концептуальной метафоры!</b></p>
+            <p>В корпусе можно искать по токену, лемме или регулярному выражению, а также по источнику и цели метафоры. Часть полей можно оставить пустыми, тогда поиск будет производиться по заданной информации. Пока в корпусе только глагольная метафора, но это не навсегда!</p>
+            <p>При поиске по <b>токену</b> найдется конкретная форма слова – та, которая введена в поле поиска. Например, если ввести <i>делать</i>, найдутся только примеры с этой формой слова.</p>
+        	<p>При поиске по <b>лемме</b> найдутся все формы слова. Например, по запросу <i>делать</i> найдутся примеры с <i>делает</i> и <i>делающий</i>.</p>
+        	<p>О том, как искать по <b>регулярному выражению</b>, можно прочитать <a href='https://dev.mysql.com/doc/refman/8.0/en/regexp.html#regexp-syntax'>тут</a>.</p>
+            <p><b>Источник</b> и <b>цель</b> – это когнитивные структуры, за счет взаимодействия которых создается метафора. Например, в основе семантики выражения <i>быть в начале жизненного пути</i> лежит метафора LIFE IS A JOURNEY. Здесь область цели, т. е. то, что в действительности описывается (ЖИЗНЬ), уподобляется области источника (ПУТЕШЕСТВИЮ).</p>
+    	</div>
+	</div>
+</body>
+</html>

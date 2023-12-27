@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All texts</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+    <div id="popup" class="popup">
+        <p>
+            Дополнительная информация о метафоре:<br>
+            Лемма: {{ lemma }}<br>
+            Источник: {{ source }}<br>
+            Цель: {{ target }}<br>
+            Часть речи: {{ pos }}
+        </p>
+        <button onclick="hidePopup()">Закрыть</button>
+    </div>
+
+    <script>
+        // Функция для показа попапа
+        function showPopup() {
+            var popup = document.getElementById('popup');
+            popup.style.display = 'block';
+
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            popup.style.top = scrollTop + 'px';
+        }
+
+        // Функция для скрытия попапа
+        function hidePopup() {
+            var popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
+
+        // Функция для пролистывания вверх
+        function topFunction() {
+			document.body.scrollTop = 0; // For Safari
+			document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+		}
+    </script>
+
+    <h1>Тексты корпуса</h1>
+
+    <button type="button" onclick="history.back()">
+        Назад
+    </button>
+
+
+    <button type="button" onclick="window.location.href='{{url_for('index')}}';">
+        На главную
+    </button>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Текст</th>
+            <th>Жанр</th>
+            <th>Автор</th>
+            <th>Название</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                {% set text = data[0][1] %}
+                {{ text[:start_sentence] }}
+                <span style="font-weight:bold;">
+                    {{ text[start_sentence:start_metaphor] }}
+                </span>
+                <span style="background-color: #D6E5FD; font-weight:bold; cursor: pointer; text-decoration: underline;" onclick="showPopup(this)">
+                    {{ text[start_metaphor:end_metaphor] }}
+                </span>
+                <span style="font-weight:bold;">
+                    {{ text[end_metaphor:end_sentence] }}
+                </span>
+                {{ text[end_sentence:] }}
+            </td>
+            <td>{{ data[0][2] }}</td>
+            <td>{{ data[0][4] }}</td>
+            <td>{{ data[0][3].replace("%20", "") }}</td>
+        </tr>
+    </tbody>
+    </table>
+    <a href="#" onclick="topFunction();return false;">Наверх</a>
+</body>

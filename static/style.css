@@ -1,0 +1,136 @@
+body {
+    margin: 20px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f8f9fa; /* White background */
+}
+
+h1, h2 {
+    color: #343a40; /* Dark gray color for headings */
+}
+
+form, table {
+    background-color: #ffffff; /* White background for forms and tables */
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+form {
+    padding: 20px;
+    padding-right: 0px;
+}
+
+td {
+	vertical-align: top;
+}
+
+input[type="text"], select {
+    padding: 5px;
+    margin: 5px 0;
+    border: 1px solid #ced4da; /* Light gray border for inputs and selects */
+}
+
+button {
+    padding: 10px 15px;
+    margin: 10px 0;
+    color: #ffffff;
+    background-color: #007bff; /* Bootstrap primary color */
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darken the button when hovered */
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6; /* Light gray border for table rows */
+}
+
+thead {
+    background-color: #e9ecef; /* Light gray background for table header */
+}
+
+a {
+    color: #007bff; /* Same as button background color for consistency */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.popup {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+span.highlight {
+    font-weight: bold; /* Highlight metaphor text */
+}
+
+span.active-metaphor {
+    background-color: yellow;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Container for both left and right content areas */
+.content-container {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space out children */
+    align-items: flex-start; /* Align children at the start */
+    margin-bottom: 20px;
+}
+
+/* styles for the left content area */
+.left-content {
+    flex: 1; /* Takes up the available space */
+    margin-right: 20px; /* Add some margin between the two columns */
+    padding-right: 20px;
+}
+
+/* styles for the right content area */
+.right-content {
+    width: 50%; /* Fixed width for the right content area */
+    /* Adjust as necessary for your specific design */
+    padding: 20px;
+    background-color: #ffffff; /* White background */
+}
+
+/* Add some responsive design to stack the divs on smaller screens */
+@media screen and (max-width: 768px) {
+    .content-container {
+        flex-direction: column; /* Stack the containers vertically */
+    }
+    .left-content,
+    .right-content {
+        margin-right: 0; /* Remove right margin */
+        width: 100%; /* Full width for small screens */
+    }
+}
+
+:root { scroll-behavior: smooth; }
+
+.sortable:hover {
+	cursor: pointer;
+}
+
+th.sortable:not(.sorttable_sorted):not(.sorttable_sorted_reverse):after {
+    content: " \25BE\25B4"; /* Unicode characters for up and down triangles */
+  }
+
+th.sorttable.sorttable_sorted:after {
+    content: " \25B4"; /* Unicode character for up triangle */
+  }
+
+th.sorttable.sorttable_sorted_reverse:after {
+    content: " \25BE"; /* Unicode character for down triangle */
+  }

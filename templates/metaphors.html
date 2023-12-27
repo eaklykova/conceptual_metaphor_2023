@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Metaphors</title>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+</head>
+<body>
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+
+    <h1>Метафоры</h1>
+
+    <button type="button" onclick="window.location.href='{{url_for('index')}}';">
+        На главную
+    </button>
+
+    <table class="sortable">
+        <thead>
+        <tr>
+            <th class="sortable">Метафора</th>
+            <th class="sortable">Источник</th>
+            <th class="sortable">Цель</th>
+            <th class="sortable">Предложение</th>
+            <th>Текст</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in data%}
+        <tr>
+            <td>{{row[1]|lower}}</td>
+            <td>{{row[5]}}</td>
+            <td>{{row[6]}}</td>
+            <td>
+            {% set start_metaphor = row[3] %}
+            {% set end_metaphor = row[4] %}
+            {% set start_sentence = row[13] %}
+            {% set end_sentence = row[14] %}
+            {% set sentence = row[11] %}
+
+            {% set start_highlight = start_metaphor - start_sentence %}
+            {% set end_highlight = end_metaphor - start_sentence %}
+
+            {{ sentence[:start_highlight] }}
+            <span style="font-weight:bold">
+                {{ sentence[start_highlight:end_highlight] }}
+            </span>
+            {{ sentence[end_highlight:] }}
+            </td>
+            <td><a href="{{ url_for('texts', text_id=row[9], start_sentence=start_sentence,
+                         end_sentence=end_sentence, start_metaphor=start_metaphor,
+                         end_metaphor=end_metaphor, lemma=row[22], source=row[5], target=row[6], pos=row[21])}}">Посмотреть в тексте</a>
+            </td>
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+    <a href="#">Наверх</a>
+
+</body>
+</html>
