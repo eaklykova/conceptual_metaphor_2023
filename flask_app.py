@@ -3,13 +3,12 @@ import mysql
 import mysql.connector
 
 def connect():
-    con = mysql.connector.connect(host='piratesdragon.mysql.pythonanywhere-services.com',
-                                  database='piratesdragon$meta_corpus',
-                                  user="piratesdragon",
-                                  password='15091998mM')
-
-
+    con = mysql.connector.connect(host='conceptmetaphor.mysql.pythonanywhere-services.com',
+                                  database='conceptmetaphor$default',
+                                  user="conceptmetaphor",
+                                  password='mysql_password')
     return con
+
 
 app = Flask(__name__)
 
